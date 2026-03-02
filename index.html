@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FOR MY SUNANDA 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Pacifico&family=Caveat:wght@700&display=swap" rel="stylesheet">
+<style>
+:root {
+--pop-pink: #ff477e;
+--love-red: #e63946;
+--glass: rgba(255, 255, 255, 0.2);
+}
+
+body {
+margin: 0;
+font-family: 'Comic Neue', cursive;
+background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+color: #333;
+overflow: hidden;
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+text-align: center;
+user-select: none;
+}
+
+h1 { font-family: 'Pacifico', cursive; font-size: 50px; color: white; text-shadow: 5px 5px var(--pop-pink); margin: 10px; }
+p { font-size: 24px; font-weight: bold; color: #444; line-height: 1.4; padding: 0 15px; }
+
+.btn-big {
+font-size: 28px;
+padding: 20px 50px;
+border-radius: 60px;
+border: 5px solid white;
+background: var(--pop-pink);
+color: white;
+cursor: pointer;
+box-shadow: 0 10px 0 #d03060;
+transition: 0.1s;
+margin: 10px;
+touch-action: manipulation;
+}
+.btn-big:active { transform: translateY(6px); box-shadow: 0 4px 0 #d03060; }
+
+.section {
+display: none;
+flex-direction: column;
+align-items: center;
+width: 95%;
+max-width: 500px;
+animation: cartoonPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.active { display: flex; }
+
+@keyframes cartoonPop {
+0% { transform: scale(0); opacity: 0; }
+100% { transform: scale(1); opacity: 1; }
+}
+
+#passInput {
+font-size: 24px;
+padding: 20px;
+border-radius: 25px;
+border: 5px solid var(--pop-pink);
+width: 80%;
+margin-bottom: 20px;
+text-align: center;
+}
+
+.emoji-giant { font-size: 130px; margin-bottom: 10px; }
+
+/* Hug Station */
+#hugCircle {
+width: 200px; height: 200px;
+background: white; border-radius: 50%;
+display: flex; justify-content: center; align-items: center;
+font-size: 100px; border: 8px solid var(--pop-pink);
+box-shadow: 0 0 30px var(--pop-pink); margin: 20px;
+cursor: pointer; transition: 0.3s;
+}
+#hugCircle.hugging { transform: scale(1.2); background: #ffe3ec; }
+
+/* Credits Scrolling */
+#creditsScreen {
+display: none;
+position: fixed;
+inset: 0;
+background: black;
+color: gold;
+z-index: 9999;
+padding-top: 100vh;
+overflow: hidden;
+}
+
+.credits-scroll {
+animation: scrollCredits 25s linear forwards;
+font-family: 'Caveat', cursive;
+font-size: 35px;
+padding: 0 20px;
+}
+
+@keyframes scrollCredits {
+from { transform: translateY(0); }
+to { transform: translateY(-2500px); }
+}
+
+.credit-title { color: var(--pop-pink); font-size: 25px; text-transform: uppercase; margin-top: 50px; }
+.credit-name { font-size: 45px; margin-bottom: 10px; }
+
+.glow-sign { font-size: 100px; filter: drop-shadow(0 0 30px gold); animation: pulse 1s infinite alternate; }
+@keyframes pulse { from { transform: scale(1); } to { transform: scale(1.1); } }
+.shake { animation: shake 0.4s; }
+@keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-20px); } 75% { transform: translateX(20px); } }
+</style>
+</head>
+<body>
+
+<div class="section active" id="gate">
+<span class="emoji-giant" id="gateEmoji">🎁</span>
+<h1>Open Surprise?</h1>
+<button class="btn-big" onclick="goToPassword()">YES! 😍</button>
+<button class="btn-big" id="noBtn" style="background: #bbb;" onclick="stubbornNo()">NO 😤</button>
+</div>
+
+<div class="section" id="passwordGate">
+<span class="emoji-giant">🔐</span>
+<h1>Password Please?</h1>
+<input type="text" id="passInput" placeholder="i love you Tushar...">
+<button class="btn-big" onclick="checkPassword()">Unlock! 🔑</button>
+</div>
+
+<div class="section" id="page0">
+<span class="emoji-giant">🧸</span>
+<h1>Hi Sunanda!</h1>
+<p>This is the biggest, cuttest surprise ever. Ready?</p>
+<button class="btn-big" onclick="showNext(1)">GO! 🚀</button>
+</div>
+
+<div class="section" id="page1">
+<span class="emoji-giant">😠</span>
+<h1>Mood Check</h1>
+<p>Scolding Counter: <strong id="scoldCount" style="font-size:50px; color:red;">999</strong></p>
+<button class="btn-big" onclick="document.getElementById('scoldCount').innerText++">Scold Him! 🎤</button>
+<button class="btn-big" style="background:orange;" onclick="showNext(2)">Next! 😂</button>
+</div>
+
+<div class="section" id="page2">
+<h1>Virtual Hug</h1>
+<p>Hold the circle to hug Tushar!</p>
+<div id="hugCircle" onmousedown="startHug()" onmouseup="endHug()" ontouchstart="startHug()" ontouchend="endHug()">🫂</div>
+<p>Hug Timer: <span id="hugTimer">0</span>s</p>
+<button class="btn-big" id="hugNext" style="display:none;" onclick="showNext(3)">Warm! 🥰</button>
+</div>
+
+<div class="section" id="page3">
+<h1>Our Secret Sign</h1>
+<div class="glow-sign">✨🤝✨</div>
+<p>It never fades. Just like us. ❤️</p>
+<button class="btn-big" onclick="showNext(4)">Almost there...</button>
+</div>
+
+<div class="section" id="page4">
+<h1>Blush Zone 🤫</h1>
+<div id="blushText" style="font-family:Caveat; font-size:35px; min-height:80px; color:#d63384;">Tap for a secret...</div>
+<button class="btn-big" onclick="makeHerBlush()">❤️ BLUSH ❤️</button>
+<button class="btn-big" onclick="showNext(5)">THE END? 💍</button>
+</div>
+
+<div class="section" id="page5">
+<h1>I LOVE YOU!</h1>
+<p>Happy Birthday, my beautiful Sunanda! Click below for the final credits...</p>
+<button class="btn-big" onclick="startCredits()">The Grand Finale 🎬</button>
+</div>
+
+<div id="creditsScreen">
+<div class="credits-scroll">
+<div class="credit-title">Produced By</div>
+<div class="credit-name">Tushar's Heart</div>
+
+<div class="credit-title">Lead Actress & Queen</div>
+<div class="credit-name">Sunanda 👑</div>
+
+<div class="credit-title">Director of Scolding</div>
+<div class="credit-name">Angry Sunanda 😠</div>
+
+<div class="credit-title">Chief Romantic Officer</div>
+<div class="credit-name">Tushar 77</div>
+
+<div class="credit-title">Special Message</div>
+<p>To my dearest Sunanda,<br><br>
+Every day with you is like a movie I never want to end.
+You are my today, my tomorrow, and my forever.
+No matter how much you scold me,
+my heart will always find its way back to your smile.
+Our secret sign will never fade,
+and my love for you will only grow. <br><br>
+Happy Birthday, Beautiful!
+</p>
+
+<div class="credit-title">The Secret Sign</div>
+<div class="credit-name">✨🤝✨</div>
+
+<div class="credit-title">Thank You For</div>
+<div class="credit-name">Existing ❤️</div>
+
+<div class="credit-title">The End</div>
+<div class="credit-name">Wait... Forever has no end! ∞</div>
+</div>
+</div>
+
+<script>
+let hugSec = 0, hugInt;
+
+function stubbornNo() {
+document.getElementById('gate').classList.add('shake');
+setTimeout(() => document.getElementById('gate').classList.remove('shake'), 400);
+document.getElementById('noBtn').innerText = "Try Again! 😂";
+}
+
+function goToPassword() { switchSection('gate', 'passwordGate'); }
+
+function checkPassword() {
+if(document.getElementById('passInput').value.toLowerCase() === 'i love you tushar77') {
+switchSection('passwordGate', 'page0');
+} else { alert("Wrong! Hint: i love you Tushar77"); }
+}
+
+function startHug() {
+document.getElementById('hugCircle').classList.add('hugging');
+hugInt = setInterval(() => {
+hugSec++; document.getElementById('hugTimer').innerText = hugSec;
+createP('💖');
+if(hugSec >= 5) document.getElementById('hugNext').style.display = 'block';
+}, 1000);
+}
+function endHug() { document.getElementById('hugCircle').classList.remove('hugging'); clearInterval(hugInt); }
+
+function makeHerBlush() {
+const lines = ["You're my favorite human.", "Your smile is my drug.", "I'm so lucky you're mine.", "I love you more than pizza!"];
+document.getElementById('blushText').innerText = lines[Math.floor(Math.random()*lines.length)];
+}
+
+function showNext(n) {
+const curr = document.querySelector('.section.active');
+switchSection(curr.id, 'page' + n);
+}
+
+function switchSection(o, n) {
+document.getElementById(o).classList.remove('active');
+document.getElementById(n).classList.add('active');
+}
+
+function startCredits() {
+document.getElementById('creditsScreen').style.display = 'block';
+for(let i=0; i<40; i++) setTimeout(() => createP('💋'), i*150);
+}
+
+function createP(s) {
+const p = document.createElement('div');
+p.innerText = s; p.style.position = 'fixed'; p.style.left = Math.random()*100+'vw';
+p.style.bottom = '-50px'; p.style.fontSize = '40px'; p.style.zIndex = '10000';
+document.body.appendChild(p);
+p.animate([{transform:'translateY(0)'},{transform:'translateY(-110vh)'}], {duration:4000}).onfinish = () => p.remove();
+}
+</script>
+</body>
+</html>
